@@ -1,117 +1,108 @@
-{\rtf1\ansi\ansicpg950\cocoartf2870
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="zh-TW">
 
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="zh-TW">\
-\
-<head>\
-  <meta charset="UTF-8">\
-\
-  <meta\
-    name="viewport"\
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"\
-  >\
-\
-  <title>\uc0\u27468 \u20180 \u25138  AR \u33225 \u35676 </title>\
-\
-  <!-- A-Frame -->\
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>\
-\
-  <!-- MindAR Face Tracking -->\
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-aframe.prod.js"></script>\
-\
-  <style>\
-    html,\
-    body \{\
-      margin: 0;\
-      padding: 0;\
-      width: 100%;\
-      height: 100%;\
-      overflow: hidden;\
-      background: black;\
-    \}\
-\
-    a-scene \{\
-      width: 100%;\
-      height: 100%;\
-    \}\
-\
-    #message \{\
-      position: fixed;\
-      z-index: 9999;\
-      top: 20px;\
-      left: 50%;\
-      transform: translateX(-50%);\
-      background: rgba(0, 0, 0, 0.6);\
-      color: white;\
-      padding: 10px 16px;\
-      border-radius: 20px;\
-      font-family: sans-serif;\
-      font-size: 14px;\
-      white-space: nowrap;\
-      pointer-events: none;\
-    \}\
-  </style>\
-</head>\
-\
-<body>\
-\
-  <div id="message">\
-    \uc0\u23559 \u33225 \u23565 \u28310 \u37857 \u38957 \
-  </div>\
-\
-  <a-scene\
-    mindar-face\
-    embedded\
-    color-space="sRGB"\
-    renderer="colorManagement: true; physicallyCorrectLights: true;"\
-    vr-mode-ui="enabled: false"\
-    device-orientation-permission-ui="enabled: false"\
-  >\
-\
-    <!-- \uc0\u36617 \u20837 \u20320 \u30340 \u33225 \u35676  PNG -->\
-    <a-assets>\
-      <img\
-        id="faceTexture"\
-        src="./face.png"\
-        crossorigin="anonymous"\
-      >\
-    </a-assets>\
-\
-    <!-- \uc0\u25163 \u27231 \u21069 \u37857 \u38957  -->\
-    <a-camera\
-      active="false"\
-      position="0 0 0"\
-    ></a-camera>\
-\
-    <!--\
-      168 = \uc0\u33225 \u20013 \u22830 \u38468 \u36817 \u30340 \u36861 \u36452 \u40670 \
-      face.png \uc0\u26371 \u36319 \u33879 \u38957 \u37096 \u31227 \u21205 \u33287 \u26059 \u36681 \
-    -->\
-    <a-entity\
-      mindar-face-target="anchorIndex: 168"\
-    >\
-\
-      <a-plane\
-        src="#faceTexture"\
-        position="0 -0.12 0.05"\
-        width="1.05"\
-        height="1.35"\
-        material="\
-          transparent: true;\
-          alphaTest: 0.01;\
-          side: double;\
-        "\
-      ></a-plane>\
-\
-    </a-entity>\
-\
-  </a-scene>\
-\
-</body>\
-\
-</html>}
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no"
+  >
+
+  <title>歌仔戲 AR 臉譜</title>
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+  <!-- MindAR Face Tracking -->
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-aframe.prod.js"></script>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #message {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+
+      padding: 10px 18px;
+
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+
+      border-radius: 30px;
+
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+
+      white-space: nowrap;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="message">
+    將臉對準鏡頭
+  </div>
+
+  <a-scene
+    mindar-face
+    embedded
+    color-space="sRGB"
+    renderer="colorManagement: true;"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false"
+  >
+
+    <!-- 載入你的歌仔戲臉譜 -->
+    <a-assets>
+      <img
+        id="faceTexture"
+        src="./face.png"
+        crossorigin="anonymous"
+      >
+    </a-assets>
+
+    <!-- 手機相機 -->
+    <a-camera
+      active="false"
+      position="0 0 0"
+    ></a-camera>
+
+    <!-- 臉部追蹤 -->
+    <a-entity
+      mindar-face-target="anchorIndex: 168"
+    >
+
+      <!-- 臉譜 -->
+      <a-plane
+        src="#faceTexture"
+        position="0 -0.1 0.05"
+        width="1.05"
+        height="1.35"
+        material="
+          transparent: true;
+          alphaTest: 0.01;
+          side: double;
+        "
+      >
+      </a-plane>
+
+    </a-entity>
+
+  </a-scene>
+
+</body>
+
+</html>
